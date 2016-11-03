@@ -5,26 +5,27 @@
     android:orientation="horizontal">
 
     <ImageView
+        android:id="@+id/product_image"
         android:layout_width="100dp"
-        android:layout_height="100dp"
-        />
+        android:layout_height="100dp" />
 
     <TextView
+        android:id="@+id/product_name"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:text="Soccer Balls"
-        android:layout_weight="3"
         android:layout_gravity="center"
+        android:layout_weight="3"
         android:gravity="center"
-        android:textStyle="bold"
+        android:text="Soccer Balls"
         android:textAppearance="?android:textAppearanceMedium"
-        />
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/product_quantity"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:text="250"
         android:gravity="center"
-        android:textAppearance="?android:textAppearanceMedium"/>
+        android:text="250"
+        android:textAppearance="?android:textAppearanceMedium" />
 </LinearLayout>

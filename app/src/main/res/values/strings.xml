@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Inventory</string>
+    <string name="save">Save Product</string>
+    <string name="delete">Delete Product</string>
+    <string name="addProduct">Add Product</string>
+    <string name="editProduct">Edit Product</string>
+    <string name="shipmentButton">Track Shipment</string>
+    <string name="saleButton">Track Sale</string>
+    <string name="imageText">Image</string>
+    <string name="quantity">Quantity</string>
+    <string name="currentQuantity">Current Quantity</string>
+    <string name="price">Price</string>
+    <string name="supplier">Supplier</string>
+    <string name="name">Name</string>
+    <string name="productName">Product Name</string>
 </resources>

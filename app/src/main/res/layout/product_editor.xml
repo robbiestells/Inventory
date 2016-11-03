@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EditorActivty">
+    tools:context=".EditorActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,14 +15,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Product Name:" />
+            android:text="@string/productName" />
 
         <EditText
             android:id="@+id/edit_product_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:hint="Name"
+            android:hint="@string/name"
             android:inputType="textCapWords" />
     </LinearLayout>
 
@@ -35,14 +35,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Supplier" />
+            android:text="@string/supplier" />
 
         <EditText
             android:id="@+id/edit_product_supplier"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:hint="Supplier"
+            android:hint="@string/supplier"
             android:inputType="textCapWords" />
     </LinearLayout>
 
@@ -55,14 +55,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Price" />
+            android:text="@string/price" />
 
         <EditText
             android:id="@+id/edit_product_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:hint="Price"
+            android:hint="@string/price"
             android:inputType="numberDecimal" />
     </LinearLayout>
 
@@ -75,14 +75,34 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Current Quantity" />
+            android:text="@string/currentQuantity" />
 
         <EditText
             android:id="@+id/edit_product_quantity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:hint="Quantity"
+            android:hint="@string/quantity"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/imageText" />
+
+        <EditText
+            android:id="@+id/edit_product_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="@string/imageText"
             android:inputType="number" />
     </LinearLayout>
 
@@ -96,14 +116,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Track Sale" />
+            android:text="@string/saleButton" />
 
         <Button
             android:id="@+id/shipment_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Track Shipment" />
+            android:text="@string/shipmentButton" />
     </LinearLayout>
 
     <ImageView
