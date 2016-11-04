@@ -72,7 +72,6 @@ public class ProductCursorAdapter extends CursorAdapter {
                     values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_QUANTITY, newQuantity);
                     Uri uri = ContentUris.withAppendedId(ProductContract.ProductEntry.CONTENT_URI, itemId);
                     context.getContentResolver().update(uri,values, null, null);
-                    //tvQuantity.setText(String.valueOf(newQuantity));
                 }
                 context.getContentResolver().notifyChange(ProductContract.ProductEntry.CONTENT_URI, null);
             }
