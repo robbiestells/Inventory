@@ -193,8 +193,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
             mNameEditText.setText(name);
             mSupplierEditText.setText(supplier);
-            mPriceEditText.setText(price);
-            mQuantityEditText.setText(quantity);
+            mPriceEditText.setText(String.valueOf(price));
+            mQuantityEditText.setText(String.valueOf(quantity));
             mImageEditText.setText(image);
         }
     }
