@@ -54,13 +54,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
 
         //find all views
-
         mNameEditText = (EditText) findViewById(R.id.edit_product_name);
         mSupplierEditText = (EditText) findViewById(R.id.edit_product_supplier);
         mQuantityEditText = (EditText) findViewById(R.id.edit_product_quantity);
         mPriceEditText = (EditText) findViewById(R.id.edit_product_price);
         mImageEditText = (EditText) findViewById(R.id.edit_product_image);
-
     }
 
     @Override
@@ -79,31 +77,41 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_save:
-//                saveProduct();
-//                finish();
-//                return true;
-//            case R.id.action_delete:
-//                return true;
-//            case android.R.id.home:
-//                if (!mProductHasChanged) {
-//                    NavUtils.navigateUpFromSameTask(this);
-//                    return true;
-//                }
-//
-//                DialogInterface.OnCancelListener discardButtonClickListener = new Dial
-//        }
-//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_save:
+                saveProduct();
+                finish();
+                return true;
+            case R.id.action_delete:
+                deleteProduct();
+                return true;
+            case android.R.id.home:
+                    NavUtils.navigateUpFromSameTask(this);
+                    return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteProduct() {
+        if (mCurrentProductUri != null){
+            int rowsDeleted = getContentResolver().delete(mCurrentProductUri, null, null);
+
+            if(rowsDeleted == 0){
+                Toast.makeText(this, getString(R.string.editor_delete_fail), Toast.LENGTH_SHORT);
+            } else {
+                Toast.makeText(this, getString(R.string.editor_delete_success), Toast.LENGTH_SHORT);
+            }
+        }
+    }
 
     private void saveProduct() {
         String nameString = mNameEditText.getText().toString().trim();
         String supplierString = mSupplierEditText.getText().toString().trim();
         Integer quantityInteger = Integer.parseInt(mQuantityEditText.getText().toString());
-        Integer priceInteger = Integer.parseInt(mPriceEditText.getText().toString());
-        Integer imageInteger = Integer.parseInt(mImageEditText.getText().toString());
+        Float priceInteger = Float.parseFloat(mPriceEditText.getText().toString());
+        String imageString = mImageEditText.getText().toString();
 
         if (mCurrentProductUri == null && TextUtils.isEmpty(nameString)) {
             Toast.makeText(this, "Name Required", Toast.LENGTH_SHORT).show();
@@ -112,7 +120,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         ContentValues values = new ContentValues();
         values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME, nameString);
-        values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE, imageInteger);
+        values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE, imageString);
         values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE, priceInteger);
 
         int quantity = 0;
@@ -181,7 +189,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             String supplier = data.getString(supplierColumnIndext);
             int price = data.getInt(priceColumnIndext);
             int quantity = data.getInt(quantityColumnIndext);
-            int image = data.getInt(imageColumnIndext);
+            String image = data.getString(imageColumnIndext);
 
             mNameEditText.setText(name);
             mSupplierEditText.setText(supplier);

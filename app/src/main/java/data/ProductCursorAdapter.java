@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,7 +33,7 @@ public class ProductCursorAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         TextView tvName = (TextView) view.findViewById(R.id.product_name);
         TextView tvQuantity = (TextView) view.findViewById(R.id.product_quantity);
-        ImageView ivImage = (ImageView) view.findViewById(R.id.product_image);
+        WebView wbImage = (WebView) view.findViewById(R.id.product_image);
 
         int nameColumnIndex = cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME);
         int quantityColumnIndex = cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_QUANTITY);
@@ -40,10 +41,10 @@ public class ProductCursorAdapter extends CursorAdapter {
 
         String name = cursor.getString(nameColumnIndex);
         int quantity = cursor.getInt(quantityColumnIndex);
-        int image = cursor.getInt(imageColumnIndext);
+        String image = cursor.getString(imageColumnIndext);
 
         tvName.setText(name);
-        tvQuantity.setText(quantity);
-        ivImage.setImageResource(image);
+        tvQuantity.setText(String.valueOf(quantity));
+        wbImage.loadUrl(image);
     }
 }

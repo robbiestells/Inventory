@@ -14,4 +14,7 @@
     <string name="name">Name</string>
     <string name="productName">Product Name</string>
     <string name="Products">Products</string>
+    <string name="editor_delete_fail">Edit failed</string>
+    <string name="editor_delete_success">Deleted Product</string>
+    <string name="quantityMainScreen">Quantity:</string>
 </resources>
