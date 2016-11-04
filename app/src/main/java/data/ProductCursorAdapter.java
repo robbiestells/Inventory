@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
@@ -45,6 +46,10 @@ public class ProductCursorAdapter extends CursorAdapter {
 
         tvName.setText(name);
         tvQuantity.setText(String.valueOf(quantity));
+
+        WebSettings settings = wbImage.getSettings();
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
         wbImage.loadUrl(image);
     }
 }
