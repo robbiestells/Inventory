@@ -12,7 +12,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "inventory.db";
     private static final int DATABASE_VERSION = 1;
 
-    public ProductDbHelper(Context context){
+    public ProductDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

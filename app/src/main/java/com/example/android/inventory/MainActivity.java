@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<C
         View emptyView = findViewById(R.id.empty_text);
         productListView.setEmptyView(emptyView);
 
-        //set up item click listener
+        //set up item click listener on listview and send to editor layout
         productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -75,7 +75,8 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<C
                 ProductContract.ProductEntry._ID,
                 ProductContract.ProductEntry.COLUMN_PRODUCT_NAME,
                 ProductContract.ProductEntry.COLUMN_PRODUCT_QUANTITY,
-                ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE
+                ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE,
+                ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE
         };
         return new CursorLoader(
                 this,

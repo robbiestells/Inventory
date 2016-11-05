@@ -41,37 +41,48 @@ public class ProductCursorAdapter extends CursorAdapter {
     public void bindView(final View view, final Context context, final Cursor cursor) {
         final int itemId = cursor.getInt(cursor.getColumnIndex(ProductContract.ProductEntry._ID));
 
+        //find name, quanity, price, and image views
         final TextView tvName = (TextView) view.findViewById(R.id.product_name);
         final TextView tvQuantity = (TextView) view.findViewById(R.id.product_quantity);
+        final TextView tvPrice = (TextView) view.findViewById(R.id.product_price);
         WebView wbImage = (WebView) view.findViewById(R.id.product_image);
 
+        //find columns in table
         int nameColumnIndex = cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME);
+        int priceColumnIndex = cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE);
         int quantityColumnIndex = cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_QUANTITY);
         int imageColumnIndext = cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE);
 
+        //get data from table
         String name = cursor.getString(nameColumnIndex);
         final int quantity = cursor.getInt(quantityColumnIndex);
+        final float price = cursor.getFloat(priceColumnIndex);
+        String priceString = "$" + String.valueOf(price);
         String image = cursor.getString(imageColumnIndext);
 
+        //assign data to views
         tvName.setText(name);
         tvQuantity.setText(String.valueOf(quantity));
+        tvPrice.setText(priceString);
 
         WebSettings settings = wbImage.getSettings();
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
         wbImage.loadUrl(image);
 
+        //create sale button that decreases quantity by one
         Button saleButton = (Button) view.findViewById(R.id.decrease_button);
         saleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ContentValues values = new ContentValues();
 
-                if (quantity > 0){
+                //decrease if quantity is not 0 and update database
+                if (quantity > 0) {
                     int newQuantity = quantity - 1;
                     values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_QUANTITY, newQuantity);
                     Uri uri = ContentUris.withAppendedId(ProductContract.ProductEntry.CONTENT_URI, itemId);
-                    context.getContentResolver().update(uri,values, null, null);
+                    context.getContentResolver().update(uri, values, null, null);
                 }
                 context.getContentResolver().notifyChange(ProductContract.ProductEntry.CONTENT_URI, null);
             }

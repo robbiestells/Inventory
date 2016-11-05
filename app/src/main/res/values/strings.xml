@@ -6,7 +6,7 @@
     <string name="editProduct">Edit Product</string>
     <string name="shipmentButton">Track Shipment</string>
     <string name="saleButton">Track Sale</string>
-    <string name="imageText">Image</string>
+    <string name="imageText">Image URL</string>
     <string name="quantity">Quantity</string>
     <string name="currentQuantity">Current Quantity</string>
     <string name="price">Price</string>
@@ -18,4 +18,13 @@
     <string name="editor_delete_success">Deleted Product</string>
     <string name="quantityMainScreen">Quantity:</string>
     <string name="empty_text">Start by adding a product!</string>
+    <string name="delete_dialog_msg">Delete product?</string>
+    <string name="cancel">Cancel</string>
+    <string name="all_fields_required">All fields required</string>
+    <string name="insert_failed">Product insert failed</string>
+    <string name="product_added">Product added!</string>
+    <string name="product_updated">Product updated!</string>
+    <string name="update_failed">Product Update failed</string>
+    <string name="contact">Contact Supplier</string>
+    <string name="priceMainScreen">Price:</string>
 </resources>

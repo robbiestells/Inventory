@@ -66,7 +66,7 @@ public class ProductProvider extends ContentProvider {
     @Override
     public String getType(Uri uri) {
         final int match = sUriMatcher.match(uri);
-        switch (match){
+        switch (match) {
             case PRODUCTS:
                 return ProductContract.ProductEntry.CONTENT_LIST_TYPE;
             case PRODUCTS_ID:
@@ -80,7 +80,7 @@ public class ProductProvider extends ContentProvider {
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         final int match = sUriMatcher.match(uri);
-        switch (match){
+        switch (match) {
             case PRODUCTS:
                 return insertProduct(uri, values);
             default:
@@ -91,7 +91,7 @@ public class ProductProvider extends ContentProvider {
     private Uri insertProduct(Uri uri, ContentValues values) {
         //Check that name is not null
         String name = values.getAsString(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME);
-        if (name == null){
+        if (name == null) {
             throw new IllegalArgumentException("Product requires a name");
         }
 
@@ -99,7 +99,7 @@ public class ProductProvider extends ContentProvider {
 
         long id = database.insert(ProductContract.ProductEntry.TABLE_NAME, null, values);
 
-        if (id == -1){
+        if (id == -1) {
             Log.e(LOG_TAG, "Failed to insert row for " + uri);
             return null;
         }
@@ -112,13 +112,37 @@ public class ProductProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        return 0;
+        SQLiteDatabase database = mHelper.getWritableDatabase();
+
+        int rowsDeleted;
+
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case PRODUCTS:
+                rowsDeleted = database.delete(ProductContract.ProductEntry.TABLE_NAME, selection, selectionArgs);
+                if (rowsDeleted != 0) {
+                    getContext().getContentResolver().notifyChange(uri, null);
+                }
+                return rowsDeleted;
+            case PRODUCTS_ID:
+                selection = ProductContract.ProductEntry._ID + "=?";
+                selectionArgs = new String[]{
+                        String.valueOf(ContentUris.parseId(uri))
+                };
+                rowsDeleted = database.delete(ProductContract.ProductEntry.TABLE_NAME, selection, selectionArgs);
+                if (rowsDeleted != 0) {
+                    getContext().getContentResolver().notifyChange(uri, null);
+                }
+                return rowsDeleted;
+            default:
+                throw new IllegalArgumentException("Deletion is not supported for " + uri);
+        }
     }
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         final int match = sUriMatcher.match(uri);
-        switch (match){
+        switch (match) {
             case PRODUCTS:
                 return updateProduct(uri, values, selection, selectionArgs);
             case PRODUCTS_ID:
@@ -132,14 +156,14 @@ public class ProductProvider extends ContentProvider {
 
     private int updateProduct(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         //Check that name is not null
-        if (values.containsKey(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME)){
+        if (values.containsKey(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME)) {
             String name = values.getAsString(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME);
-            if (name == null){
+            if (name == null) {
                 throw new IllegalArgumentException("Product requires a name");
             }
         }
 
-        if (values.size() == 0){
+        if (values.size() == 0) {
             return 0;
         }
 
@@ -147,10 +171,9 @@ public class ProductProvider extends ContentProvider {
 
         int rowsUpdated = database.update(ProductContract.ProductEntry.TABLE_NAME, values, selection, selectionArgs);
 
-        if (rowsUpdated != 0){
+        if (rowsUpdated != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
-
         return rowsUpdated;
     }
 }
